@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+	<title>message-circle</title>
+	<defs>
+		<image  width="20" height="20" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAAXNSR0IB2cksfwAAADNQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAowVGyQAAABF0Uk5TABB/v+//z48gn0Cg3zCQgFDsQwXNAAAAkklEQVR4nG1QURbCMAgLlqxrZdT7n1bWdbpO8wUhLwSADnkkJZe84gPJPFFkcOsSTRVIfZJ2iMVo2zmPumvzOR2KvA/Ji/1onQVXOBuQWCeycgGUMpFCBUjM2Im/yl/PBLTb9kIf2+45y6SMO0MIu3pux+2Vhprt+FKJn67dV5VfeM9nUam/PD6vqY3Ipj7nDLwBkfUEoiihWfEAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="2" y="2"/>
+</svg>
