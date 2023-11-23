@@ -12,8 +12,16 @@ class HomeController extends Controller
 {
     function events() {
        $Championship= Tournament::where('status','paid')->where('featured_image','!=','')->get();
-       $ChampionshipAll= Tournament::where('status','paid')->get();
-        return view('events',['Championship'=>$Championship,'ChampionshipAll'=>$ChampionshipAll]);
+       $ChampionshipAll= Tournament::where('status','!=','cancelled')->orderBy('started_at', 'DESC')->get();
+       $onGoing= Tournament::where('status','!=','cancelled')->where('started_at', '>=', strtotime(date('Y m d').'00:00:00'))->where('started_at', '<=', strtotime(date('Y m d').'23:59:59'))->orderBy('started_at', 'DESC')->get();
+       $upComming = Tournament::where('status','!=','cancelled')->where('started_at', '<=', strtotime(date('Y m d').'23:59:59'))->orderBy('started_at', 'DESC')->get();
+       $data = [
+        'upComming'=>$upComming, 
+        'onGoing'=>$onGoing, 
+        'Championship'=>$Championship,
+        'ChampionshipAll'=>$ChampionshipAll
+        ];
+       return view('events',$data);
     }
     
     function events_info($championship_id) {

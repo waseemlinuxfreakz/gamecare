@@ -14,7 +14,7 @@ class Tournaments extends Controller
         try {
             $withHearders = ['accept' => 'application/json', 'Authorization' => ' Bearer 947e0d8b-c013-4c57-a2b4-c327a74ef994'];
 
-            $response = Http::withHeaders($withHearders)->get('https://open.faceit.com/data/v4/tournaments?game=csgo&offset=0&limit=100');
+            $response = Http::withHeaders($withHearders)->get('https://open.faceit.com/data/v4/tournaments?game=csgo&offset=0&limit=1000');
             Log::info($response);
             if ($response->failed()):
 
@@ -22,8 +22,10 @@ class Tournaments extends Controller
             else:
                 $result = $response->json();
                 // return $result;
+                // $finalResult = array();
                 if (count($result['items']) > 0):
                     foreach ($result['items'] as $key => $tournamentData):
+                        // if(date('Y',$tournamentData['started_at']) == date('Y')){
                         $tournament = Tournament::updateOrCreate(['tournament_id' => $tournamentData['tournament_id']],[
                             'name' => $tournamentData['name'],
                             'featured_image' => $tournamentData['featured_image'],
@@ -50,11 +52,13 @@ class Tournaments extends Controller
                             'subscriptions_count' => $tournamentData['subscriptions_count'],
                             'faceit_url' => $tournamentData['faceit_url'],
                         ]);
-                    
+                        // }
+                        // $finalResult[] = $tournament;
                     endforeach;
 
                 endif;
             endif;
+            // return $response;
         } catch (\Exception $e) {
            return $response = ['error' => $e->getMessage(), "message" => "Bot not working"];
             Log::info($e->getMessage());

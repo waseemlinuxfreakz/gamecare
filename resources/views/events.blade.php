@@ -143,16 +143,18 @@
                                 <div class="tourament_list">
                                 
                                     <div class="month_year">
-                                        <span>{{App\Http\Controllers\HomeController::miliToTimestamp('M',$Champ->subscription_start)}}</span> {{App\Http\Controllers\HomeController::miliToTimestamp('Y',$Champ->subscription_start)}}
+                                        <span><?=date('Y',$Champ->started_at)?></span>
                                     </div>
 
-                                    <div class="month_day">
-                                        {{App\Http\Controllers\HomeController::miliToTimestamp('D',$Champ->subscription_start)}}
+                                    <!-- <div class="month_day"> -->
+                                    <div class="month_year">
+                                        {{date('D d, M',$Champ->started_at)}}
                                     </div>
 
                                     <div class="tourament_name_subhead">
                                         <h3><a href="{{route('home.events.details',['tournament_id'=>base64_encode($Champ->tournament_id)])}}">{{$Champ->name}}</a></h3>
-                                        <p>5v5 Tournament</p>
+                                        <p>{{$Champ->match_type}}</p>
+
                                     </div>
 
                                     <div class="participate_users">
@@ -212,25 +214,27 @@
 
                             </div>
                             <div id="ongoing" class="tab-pane fade">
-                                <div class="date_wise_results">
+                                <!-- <div class="date_wise_results">
                                     <div class="date_text">
                                         <img src="{{ url('images/calendar.svg') }}" alt=""> 4 Jul 2023
                                     </div>
-                                </div>
-
+                                </div> -->
+                                @if(count($onGoing)>0)
+                                @foreach($onGoing as $current)
                                 <div class="tourament_list">
 
                                     <div class="month_year">
-                                        <span>Jul</span> 2023
+                                        <span><?=date('Y',$current->started_at)?></span>
                                     </div>
 
-                                    <div class="month_day">
-                                        04
+                                    <!-- <div class="month_day"> -->
+                                    <div class="month_year">
+                                        {{date('D d, M',$current->started_at)}}
                                     </div>
 
                                     <div class="tourament_name_subhead">
-                                        <h3><a href="#">SKS 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
+                                        <h3><a href="{{route('home.events.details',['tournament_id'=>base64_encode($current->tournament_id)])}}">{{$current->name}}</a></h3>
+                                        <p>{{$current->match_type}}</p>
                                     </div>
 
                                     <div class="participate_users">
@@ -245,7 +249,7 @@
                                     </div>
 
                                     <div class="tourament_prize_pool">
-                                        $3242
+                                        {{$current->total_prizes>0?$current->total_prizes:'N/A'}}
                                         <span>Prize Pool</span>
                                     </div>
 
@@ -253,138 +257,42 @@
                                         <a href="#"><img src="{{ url('images/btns.svg') }}" alt=""></a>
                                     </div>
                                 </div>
+                                @endforeach
+                                @else
+                                    <p class="text text-center">No Data</p>
+                                @endif
 
-                                <div class="tourament_list">
+                                
 
-                                    <div class="month_year">
-                                        <span>Jul</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        15
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">DIO 2023 Summer</a></h3>
-                                        <p>1v1 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <span class="users_counter">4+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        -
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}" alt=""></a>
-                                    </div>
-                                </div>
-
-                                <div class="date_wise_results">
+                                <!-- <div class="date_wise_results">
                                     <div class="date_text">
                                         <img src="{{ url('images/calendar.svg') }}" alt=""> 4 Jul 2023
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="tourament_list">
-
-                                    <div class="month_year">
-                                        <span>Jun</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        12
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">VIRL 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar4.svg') }}" alt="">
-                                            <span class="users_counter">7+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        $30
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}"alt=""></a>
-                                    </div>
-                                </div>
-
-                                <div class="tourament_list">
-
-                                    <div class="month_year">
-                                        <span>Jun</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        12
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">SKS 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar4.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar5.svg') }}" alt="">
-                                            <span class="users_counter">8+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        $300
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}"alt=""></a>
-                                    </div>
-                                </div>
                             </div>
                             <div id="upcoming" class="tab-pane fade">
-                                <div class="date_wise_results">
+                                <!-- <div class="date_wise_results">
                                     <div class="date_text">
                                         <img src="{{ url('images/calendar.svg') }}" alt=""> 4 Jul 2023
                                     </div>
-                                </div>
-
+                                </div> -->
+                                @if(count($upComming)>0)
+                                @foreach($upComming as $upcom)
                                 <div class="tourament_list">
 
                                     <div class="month_year">
-                                        <span>Jul</span> 2023
+                                        <span><?=date('Y',$upcom->started_at)?></span>
                                     </div>
 
-                                    <div class="month_day">
-                                        04
+                                    <!-- <div class="month_day"> -->
+                                    <div class="month_year">
+                                        {{date('D d, M',$upcom->started_at)}}
                                     </div>
 
                                     <div class="tourament_name_subhead">
-                                        <h3><a href="#">SKS 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
+                                        <h3><a href="{{route('home.events.details',['tournament_id'=>base64_encode($upcom->tournament_id)])}}">{{$upcom->name}}</a></h3>
+                                        <p>{{$upcom->match_type}}</p>
                                     </div>
 
                                     <div class="participate_users">
@@ -399,7 +307,7 @@
                                     </div>
 
                                     <div class="tourament_prize_pool">
-                                        $3242
+                                        {{$upcom->total_prizes>0?$upcom->total_prizes:'N/A'}}
                                         <span>Prize Pool</span>
                                     </div>
 
@@ -407,117 +315,10 @@
                                         <a href="#"><img src="{{ url('images/btns.svg') }}" alt=""></a>
                                     </div>
                                 </div>
-
-                                <div class="tourament_list">
-
-                                    <div class="month_year">
-                                        <span>Jul</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        15
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">DIO 2023 Summer</a></h3>
-                                        <p>1v1 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <span class="users_counter">4+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        -
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}"alt=""></a>
-                                    </div>
-                                </div>
-
-                                <div class="date_wise_results">
-                                    <div class="date_text">
-                                        <img src="{{ url('images/calendar.svg') }}" alt=""> 4 Jul 2023
-                                    </div>
-                                </div>
-
-                                <div class="tourament_list">
-
-                                    <div class="month_year">
-                                        <span>Jun</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        12
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">VIRL 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar4.svg') }}" alt="">
-                                            <span class="users_counter">7+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        $30
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}"alt=""></a>
-                                    </div>
-                                </div>
-
-                                <div class="tourament_list">
-
-                                    <div class="month_year">
-                                        <span>Jun</span> 2023
-                                    </div>
-
-                                    <div class="month_day">
-                                        12
-                                    </div>
-
-                                    <div class="tourament_name_subhead">
-                                        <h3><a href="#">SKS 2023 Summer</a></h3>
-                                        <p>5v5 Tournament</p>
-                                    </div>
-
-                                    <div class="participate_users">
-                                        <div class="user_list">
-                                            <img src="{{ url('images/user-img/Avatar1.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar2.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar3.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar4.svg') }}" alt="">
-                                            <img src="{{ url('images/user-img/Avatar5.svg') }}" alt="">
-                                            <span class="users_counter">8+ </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="tourament_prize_pool">
-                                        $300
-                                        <span>Prize Pool</span>
-                                    </div>
-
-                                    <div class="tourament_arrow">
-                                        <a href="#"><img src="{{ url('images/btns.svg') }}"alt=""></a>
-                                    </div>
-                                </div>
+                                @endforeach
+                                @else
+                                <p class="text text-center">No data</p>
+                                @endif
                             </div>
                             <div id="results" class="tab-pane fade">
                                 <div class="date_wise_results">
